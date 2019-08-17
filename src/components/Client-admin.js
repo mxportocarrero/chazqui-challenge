@@ -1,21 +1,27 @@
 import React from 'react'
 import './Client-admin.css'
 import ClientInstructions from './Client-instructions.js'
+import Driver from './Driver.js';
+
+import shortid from 'shortid'
 
 class ClientAdmin extends React.Component{
 
     // requestState: "waiting, searching"
     state = {
         tags: [],
-        start:[0,0],
-        end:[0,0],
-        requestState: "waiting"
+        requestState: "waiting",
+        drivers: []
     }
 
 
     constructor(props){
         super(props)
         this.requestService = this.requestService.bind(this)
+    }
+
+    drawClientInfo(client){
+        this.props.drawClientInfo(client)
     }
 
     // Funcion para validar los campos antes de solicitar los servicios
@@ -37,10 +43,17 @@ class ClientAdmin extends React.Component{
         //console.log(`${this.in_start_x.value},${this.in_start_y.value}`)
         //console.log(`${this.in_end_x.value},${this.in_end_y.value}`)
         this.validateServiceRequest();
-        this.setState({start:[this.in_start_x.value,this.in_start_y.value],
-                        end:[this.in_end_x.value,this.in_end_y.value],
-                        requestState:'searching'})
+        this.setState({requestState:'searching'})
 
+        const client = {
+                name: this.textInput.value,
+                startLocation: [this.in_start_x.value,this.in_start_y.value],
+                endLocation: [this.in_end_x.value,this.in_end_y.value]
+              }
+
+        this.drawClientInfo(client);
+
+        //console.log(this.props.drivers);
 
         // Cuando ya se haya encontrado los resultados
         setTimeout(() => this.setState({requestState:'done'}),2000);
@@ -109,7 +122,7 @@ class ClientAdmin extends React.Component{
         switch(val){
             case 'waiting':
                 return(
-                    <div>waiting</div>
+                    <div>Esperando su solicitud</div>
                 )
             case 'searching':
                 return(
@@ -117,7 +130,26 @@ class ClientAdmin extends React.Component{
                 )
             case 'done':
                 return(
-                    <div>search done</div>
+                    <div>
+                    Taxis Disponibles
+                    {
+                        typeof this.props.drivers === 'undefined' || this.props.drivers.length <= 0
+                        ? <p>No contamos con un vehiculo disponible para sus requerimientos por el momento</p>
+                        :
+                            this.props.drivers.map( (driver,index) => {
+                            return (
+                                <Driver 
+                                    driverId={driver.id}
+                                    driverName={driver.name}
+                                    driverAdds={driver.adds}
+                                    driverState={driver.state}
+                                    confirmDriver={this.confirmDriver}
+                                    key={shortid.generate()}
+                                />
+                            )
+                            })
+                    }
+                    </div>
                 )
             default: break;
         }

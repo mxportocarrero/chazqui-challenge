@@ -39,20 +39,7 @@ class App extends React.Component {
       //   active:false,
       // },      
     ],
-    clients: [
-      {
-        name: "carlitos",
-        location: [6,8],
-        reqs:["candies"],
-        active:true
-      },
-      {
-        name: "ana",
-        location: [65,35],
-        reqs:["music","pets"],
-        active:false
-      },
-    ],
+    client: {},
     tags: []
   }
 
@@ -63,6 +50,9 @@ class App extends React.Component {
     this.app_conn = firebase.initializeApp(DB_CONFIG);
     this.driversRef = this.app_conn.database().ref('drivers');
     this.tagsRef = this.app_conn.database().ref('tags');
+
+    // Functions
+    this.drawClientInfo = this.drawClientInfo.bind(this);
   }
 
   // Eventos de React
@@ -96,6 +86,20 @@ class App extends React.Component {
         })
   }
 
+  drawClientInfo(client){
+    this.setState({client: client})
+  }
+
+  availableDrivers(){
+    // Seleccionaremos a los drivers disponibles
+    const drivers = []
+    this.state.drivers.forEach( driver =>{
+      if(driver.state)
+        drivers.push(driver)
+    })
+    return drivers;
+  }
+
   render(){
     return (
       <div className="chazqui-app">
@@ -103,11 +107,18 @@ class App extends React.Component {
           <h1>Chazqui Challenge</h1>
         </div>
         <div className="app-body">
-          <ClientAdmin tags={this.state.tags}/>
+          <ClientAdmin 
+            tags={this.state.tags}
+            drawClientInfo={this.drawClientInfo}
+            drivers={this.availableDrivers()}/>
 
           <div className="map-area">
             <DriverDots drivers={this.state.drivers} />
-            <ClientDots clients={this.state.clients} />
+            {
+              Object.entries(this.state.client).length !== 0
+              ? <ClientDots client={this.state.client} />
+              : <div></div>
+            }
           </div>
 
           <DriverAdmin 

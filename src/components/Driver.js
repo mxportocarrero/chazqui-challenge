@@ -18,6 +18,10 @@ class Driver extends React.Component{
         this.props.deleteDriver(id)
     }
 
+    handleConfirm(id){
+        console.log("Confirmando Taxi")
+    }
+
 
     render(){
         return (
@@ -46,7 +50,12 @@ class Driver extends React.Component{
                             <span className="tags-none">none</span>&nbsp;
                         </div>
                     }
-                    <div><span className="delete-span" onClick={() => this.handleDelete(this.driverId)}>Eliminar</span></div>
+                    {
+                        typeof this.props.deleteDriver !== 'undefined'
+                        ? <div><span className="delete-span" onClick={() => this.handleDelete(this.driverId)}>Eliminar</span></div>
+                        : <div><span className="confirm-span" onClick={() => this.handleConfirm(this.driverId)}>Confirmar</span></div>
+                    }
+                    
                     </div>
                 </div>
                 

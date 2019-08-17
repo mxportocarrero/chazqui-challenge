@@ -1,27 +1,22 @@
 import React from 'react';
 
 const ClientDot = (props) => {
+    const style_start = {
+        left: `${props.client.startLocation[0]}%`,
+        top: `${props.client.startLocation[1]}%`
+    }
+    const style_end = {
+        left: `${props.client.endLocation[0]}%`,
+        top: `${props.client.endLocation[1]}%`
+    }
     return (
         <div>
-            {
-                props.clients.map( client => {
-                    const style = {
-                        left: `${client.location[0]}%`,
-                        top: `${client.location[1]}%`
-                    }
-                    
-                    if(!client.active)
-                        style.background = "#777"
-
-                    return (
-                        <div className="client-dot"
-                        key={client.name}
-                        style={style}>
-                            {client.name}
-                        </div>
-                    )
-                })
-            }
+            <div className="client-dot" style={style_start}>
+                Inicio {props.client.name}
+            </div>
+            <div className="client-dot" style={style_end}>
+                Fin {props.client.name}
+            </div>
         </div>
     )
 

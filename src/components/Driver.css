@@ -42,3 +42,13 @@
     border-radius: 3px;
     font-size: 12px;
 }
+
+.confirm-span{
+    padding-right: 3px;
+    padding-left: 3px;
+    color: #fff;
+    font-weight: bold;
+    background: rgb(0, 211, 0);
+    border-radius: 3px;
+    font-size: 12px;
+}
