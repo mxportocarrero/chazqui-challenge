@@ -10,7 +10,7 @@ class Driver extends React.Component{
         this.driverName = props.driverName
         this.driverId = props.driverId
         this.driverAdds = props.driverAdds
-        this.driverActive = props.driverActive
+        this.driverState = props.driverState
     }
 
     handleDelete(id){
@@ -24,11 +24,11 @@ class Driver extends React.Component{
             <div className="Driver">
                 <div className="info">
                     <div>Name: &nbsp; {this.driverName}</div>
-                    <div>Activo:
+                    <div>Estado:
                         {
-                            this.driverActive
-                            ? " Si"
-                            : " No"
+                            this.driverState
+                            ? " Libre"
+                            : " Ocupado"
                         }
                     </div>
                     <div>Tags: &nbsp;

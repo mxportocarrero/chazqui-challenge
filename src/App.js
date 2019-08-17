@@ -5,11 +5,13 @@ import DriverDots from './components/Driver-dot.js';
 import DriverAdmin from './components/Driver-admin.js';
 
 import ClientDots from './components/Client-dot.js';
+import ClientAdmin from './components/Client-admin';
 
 // Librerias Firebase
 import firebase from 'firebase';
 import { DB_CONFIG } from './config.js';
 import 'firebase/database';
+
 
 class App extends React.Component {
 
@@ -51,7 +53,7 @@ class App extends React.Component {
         active:false
       },
     ],
-    tags: ["candies","pets","music","A/C"]
+    tags: []
   }
 
   constructor(){
@@ -60,6 +62,7 @@ class App extends React.Component {
     //Firebase Connection
     this.app_conn = firebase.initializeApp(DB_CONFIG);
     this.driversRef = this.app_conn.database().ref('drivers');
+    this.tagsRef = this.app_conn.database().ref('tags');
   }
 
   // Eventos de React
@@ -77,10 +80,19 @@ class App extends React.Component {
               name: childSnapShot.val().name,
               location: childSnapShot.val().location,
               adds: childSnapShot.val().adds,
-              active:childSnapShot.val().active,
+              state:childSnapShot.val().state,
             })
           })
           this.setState({drivers})
+        })
+
+        // Recibiendo los tags
+        this.tagsRef.on('value', snapShot =>{
+          const tags = []
+          snapShot.forEach( child => {
+            tags.push(child.val())
+          })
+          this.setState({tags})
         })
   }
 
@@ -91,14 +103,16 @@ class App extends React.Component {
           <h1>Chazqui Challenge</h1>
         </div>
         <div className="app-body">
-          <DriverAdmin 
-            tags={this.state.tags}
-            app_conn={this.app_conn}/>
+          <ClientAdmin tags={this.state.tags}/>
 
           <div className="map-area">
             <DriverDots drivers={this.state.drivers} />
             <ClientDots clients={this.state.clients} />
           </div>
+
+          <DriverAdmin 
+            tags={this.state.tags}
+            app_conn={this.app_conn}/>
 
         </div>
         <div className="app-footer">

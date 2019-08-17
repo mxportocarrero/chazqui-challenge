@@ -50,7 +50,7 @@ class DriverAdmin extends React.Component {
               name: childSnapShot.val().name,
               location: childSnapShot.val().location,
               adds: childSnapShot.val().adds,
-              active:childSnapShot.val().active,
+              state:childSnapShot.val().state,
             })
           })
           this.setState({drivers})
@@ -60,7 +60,7 @@ class DriverAdmin extends React.Component {
     checkActiveDrivers(){
         let flag = false;
         for(let i = 0; i < this.state.drivers.length;i++){
-            if(this.state.drivers[i].active){
+            if(this.state.drivers[i].state){
                 flag = true;
                 break;
             }
@@ -85,7 +85,7 @@ class DriverAdmin extends React.Component {
           name: driverName,
           location: getRandomCoordinates(),
           adds: driverTags,
-          active:true,
+          state:true,
         })
     }
 
@@ -115,7 +115,7 @@ class DriverAdmin extends React.Component {
                                     driverId={driver.id}
                                     driverName={driver.name}
                                     driverAdds={driver.adds}
-                                    driverActive={driver.active}
+                                    driverState={driver.state}
                                     deleteDriver={this.deleteDriver}
                                     key={shortid.generate()}
                                 />

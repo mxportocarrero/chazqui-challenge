@@ -1,0 +1,73 @@
+.client-admin{
+    margin-right: 30px;
+    margin-left: 30px;
+    background: #fff;
+}
+.client-instructions{
+    width: 700px;
+    margin: 20px auto;
+}
+
+.client-instructions h4, .client-admin div.row div.column.left h4 {
+    text-align: center;
+    margin: 5px;
+}
+
+.client-instructions p, .client-instructions ul{
+    text-align: justify;
+    text-justify: inter-word;
+    font-size: 13px;
+    margin: 0px;
+}
+
+.client-form{
+    border: 1px solid #000;
+}
+
+/* Create two unequal columns that floats next to each other */
+.client-admin div.row div.column {
+    float: left;
+}
+  
+.client-admin div.row div.column.left {
+    width: 60%;
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-bottom: 10px;
+    border:1px solid #000;
+}
+  
+.client-admin div.row div.column.right {
+    padding-left: 5px;
+    width: 25%;
+    border:1px solid #000;
+}
+  
+  /* Clear floats after the columns */
+  .client-admin div.row:after {
+  content: "";
+    display: table;
+    clear: both;
+}
+
+/* Client Form */
+
+.client-admin input[type="text"]{
+    padding: 5px;
+}
+
+.client-admin button{
+    margin-top: 10px;
+    padding: 10px;
+    color: #fff;
+    background: #019875;
+    border: none;
+}
+
+.client-admin button:hover{
+    background-color: #02bab5;
+}
+
+.input-coord{
+    width: 20px;
+}
