@@ -1,33 +1,94 @@
-.App {
-  text-align: center;
+body{
+    background: #373B44;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #4286f4, #373B44);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #4286f4, #373B44); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+.app-header{
+    text-align: center;
+    border: 2px solid #f00;
+    color: #fff;
+    font-family: 'Lobster', cursive;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.app-body{    
+    border: 2px solid #0f0;
 }
 
-.App-link {
-  color: #61dafb;
+.app-footer{
+    color: #fff;
+    background: #000;
+    text-align: right;
+    border: 2px solid #00f;
+    padding: 10px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.app-header, .app-body{
+    background-color: rgba(0, 0, 0, .2)
+}
+
+
+.map-area {
+    position: relative;
+    margin: 50px auto;
+    width: 600px;
+    height: 600px;
+    border: 3px solid #000;
+    background: #fff
+}
+
+.driver-dot {
+    text-align: center;
+    position: absolute;
+    width: 2%;
+    height: 2%;
+    background-color: #00f;
+    border: 1px solid #fff;
+    z-index: 2;
+}
+  
+.client-dot {
+    position: absolute;
+    width: 2%;
+    height: 2%;
+    background: red;
+    border: 1px solid #fff;
+    z-index: 1;
+}
+
+.drivers-admin{
+    margin: 10px;
+    padding: 5px;
+    border: 2px solid #000;
+    background: #fff
+}
+
+.drivers-admin h4{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+/* Create two unequal columns that floats next to each other */
+.column {
+    float: left;
+}
+  
+.left {
+    width: 60%;
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-bottom: 10px;
+    border:1px solid #000;
+}
+  
+.right {
+    padding-left: 5px;
+    width: 35%;
+}
+  
+  /* Clear floats after the columns */
+.row:after {
+  content: "";
+    display: table;
+    clear: both;
 }

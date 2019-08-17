@@ -1,0 +1,14 @@
+.driver-form input[type="text"]{
+    padding: 5px;
+}
+
+.driver-form button{
+    padding: 10px;
+    color: #fff;
+    background: #019875;
+    border: none;
+}
+
+.driver-form button:hover{
+    background-color: #02bab5;
+}
