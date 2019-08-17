@@ -1,3 +1,6 @@
+# chazqui-challenge
+React+Firebase project for Chazqui
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
