@@ -12,6 +12,8 @@ import firebase from 'firebase';
 import { DB_CONFIG } from './config.js';
 import 'firebase/database';
 
+//import shortid from 'shortid'
+
 
 class App extends React.Component {
 
@@ -39,6 +41,7 @@ class App extends React.Component {
       //   active:false,
       // },      
     ],
+    availableDrivers: [],
     client: {},
     tags: []
   }
@@ -84,20 +87,25 @@ class App extends React.Component {
           })
           this.setState({tags})
         })
+
+        // Filtrando los taxis que estan ocupados
+        this.driversRef.orderByChild("state").equalTo(true).on('value',snapShot => {
+          const availableDrivers = []
+          snapShot.forEach( childSnapShot => {
+            availableDrivers.push({
+              id: childSnapShot.key,
+              name: childSnapShot.val().name,
+              location: childSnapShot.val().location,
+              adds: childSnapShot.val().adds,
+              state:childSnapShot.val().state,
+            })
+          })
+          this.setState({availableDrivers})
+        })
   }
 
   drawClientInfo(client){
     this.setState({client: client})
-  }
-
-  availableDrivers(){
-    // Seleccionaremos a los drivers disponibles
-    const drivers = []
-    this.state.drivers.forEach( driver =>{
-      if(driver.state)
-        drivers.push(driver)
-    })
-    return drivers;
   }
 
   render(){
@@ -110,7 +118,7 @@ class App extends React.Component {
           <ClientAdmin 
             tags={this.state.tags}
             drawClientInfo={this.drawClientInfo}
-            drivers={this.availableDrivers()}/>
+            drivers={this.state.availableDrivers} />
 
           <div className="map-area">
             <DriverDots drivers={this.state.drivers} />

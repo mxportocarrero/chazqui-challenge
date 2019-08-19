@@ -11,6 +11,7 @@ class Driver extends React.Component{
         this.driverId = props.driverId
         this.driverAdds = props.driverAdds
         this.driverState = props.driverState
+        this.driverDistance = props.driverDistance
     }
 
     handleDelete(id){
@@ -19,7 +20,7 @@ class Driver extends React.Component{
     }
 
     handleConfirm(id){
-        console.log("Confirmando Taxi")
+        alert("Taxi confirmado muchas gracias por su preferencia!")
     }
 
 
@@ -35,6 +36,11 @@ class Driver extends React.Component{
                             : " Ocupado"
                         }
                     </div>
+                    {
+                        typeof this.driverDistance !== 'undefined'
+                        ? <div>Distancia: {this.driverDistance.toFixed(2)} m.</div>
+                        : ""
+                    }
                     <div>Tags: &nbsp;
                     {
                         // Revisamos si el Driver tiene algun Implemento

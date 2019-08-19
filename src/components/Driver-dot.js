@@ -10,6 +10,8 @@ const DriverDot = (props) => {
                     left: `${driver.location[0]}%`,
                     top: `${driver.location[1]}%`
                 }
+                if(!driver.state)
+                    style.background = "#777"
                 return (
                 <div className="driver-dot" style={style} key={driver.name}>
                     {driver.name}
